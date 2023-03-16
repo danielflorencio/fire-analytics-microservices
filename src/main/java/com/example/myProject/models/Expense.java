@@ -15,7 +15,7 @@ public class Expense {
 
     @Override
     public String toString() {
-        return "Expense [date=" + date + ", category=" + category + ", title=" + title + ", value=" + value + "]";
+        return "Expense [date=" + date + ", category=" + category + ", title=" + title + ", value=" + value + "]</br>";
     }
 
     public Date getDate() {
