@@ -6,6 +6,7 @@ import com.example.myProject.models.Expense;
 
 public class expensesData {
     public static List<Expense> expenses = new ArrayList<>();
+    
     static {
         expenses.add(new Expense(new Date(2022, 11, 5), "food", "Chicken", 22.7));
         expenses.add(new Expense(new Date(2022, 11, 14), "food", "Energetic", 8.8));
@@ -63,4 +64,35 @@ public class expensesData {
         expenses.add(new Expense(new Date(2023, 2, 28), "entertainment", "Museum tickets", 18.0));
         expenses.add(new Expense(new Date(2023, 3, 30), "food", "Brunch", 24.9));
     }    
+
+
+    public float getNextMonthPreview(){
+        float totalIncome = 0;
+        float totalExpenses = 0;
+
+        
+        for (Expense expense : expenses) {
+            // If the expense category is "salary", add the value to the total income
+            if (expense.getCategory().equals("salary")) {
+                totalIncome += expense.getValue();
+            }
+            // If the expense category is anything else, add the value to the total expenses
+            else {
+                totalExpenses += expense.getValue();
+            }
+        }
+
+        return totalIncome - totalExpenses;
+    }
+    public float getNextYearPreview(){
+        float response = 0;
+        
+        for(int i = 0; i < expenses.size(); i++){
+            
+        }
+        
+        return response;
+    }
+
+
 }
