@@ -40,13 +40,19 @@ public class MyProject {
 
     public List<DayData> calculateMonthPreview(String userId){      
       List<Date> sortedDates = new ArrayList<>(getSortedDates(expensesData.expenses));
+      System.out.println("Sorted Dates: " + sortedDates);
       // Get the data from the database. In this case, we're gonna get it from another java file.  
       List<DayData> daysData = new ArrayList<>();
       
       for(int i = 0; i < sortedDates.size(); i++){
-        daysData = (List<DayData>) new DayData(sortedDates.get(i));
+        
+        DayData newDay = new DayData(sortedDates.get(i));
+        daysData.add(newDay);
+        // daysData.set(i, newDay);
+        // daysData.set(i, sortedDates.get(i))
+        // daysData = (List<DayData>) new DayData(sortedDates.get(i));
       }
-
+      System.out.println("daysData post first FOR: " + daysData);
       for(int i = 0; i < sortedDates.size(); i++){
         for(int n = 0; n < expensesData.expenses.size(); n++){
           if(sortedDates.get(i).equals(expensesData.expenses.get(n).getDate())){
@@ -58,7 +64,7 @@ public class MyProject {
           }
         }
       }    
-      // System.out.println(daysData);
+      System.out.println("daysData post second: " + daysData);
       return daysData;
     }
 
@@ -75,20 +81,9 @@ public class MyProject {
         return ResponseEntity.ok(daysData);
     }
 
-
-    // @GetMapping("/multiply")
-    // public String hello(@RequestParam(value = "number", defaultValue = "0") float number) {
-    //   return String.format("The response is %s!", number*2);
-    // }
-
-    // @GetMapping("/multiply")
-    // public String hello(@RequestParam(value = "number", defaultValue = "0") float number) {
-    //   return String.format("The response is %s!", number*2);
-    // }
-    
     @GetMapping("/days-data-string")
     public String getMonthPreview(@RequestParam(value = "userId", defaultValue = "0") String userId) {
-      return String.format("The response is X!");    
+      return String.format("The response is %s!", calculateMonthPreview(userId).toString());    
     }
 
     // public ResponseEntity<Double> getMonthPreview(@RequestBody Map<String, Object> payload) {
@@ -97,4 +92,9 @@ public class MyProject {
       // Double monthPreview = calculateMonthPreview(payload.get("userId").toString());
       // return ResponseEntity.ok(monthPreview);
     // }  
+
+
+    // userId is being received. 
+    
+
 }
