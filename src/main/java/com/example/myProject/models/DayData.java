@@ -12,7 +12,6 @@ public class DayData {
     public double totalBalance;
 
 
-    
     public DayData(Date date){
         this.date = date;
         this.incomes = 0;
@@ -32,6 +31,16 @@ public class DayData {
     }
     public double getTotalBalance(){
         return this.totalBalance;
+    }
+
+    @Override
+    public String toString() {
+    return "DayData{" +
+            "Date=" + this.date +
+            ", day incomes='" + this.incomes + '\'' +
+            ", day expenses='" + this.expenses + '\'' +
+            ", day totalBalance='" + this.totalBalance + '\'' +
+            '}';   
     }
 
     public void setDate(Date date){

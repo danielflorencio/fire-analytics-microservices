@@ -24,7 +24,7 @@ public class MyProject {
     public String hello(@RequestParam(value = "number", defaultValue = "0") float number) {
       return String.format("The response is %s!", number*2);
     }
-    @GetMapping("/preview")
+    @GetMapping("/previewValues")
     public String hello(@RequestParam(value = "userId", defaultValue = "0") double number) {
       return String.format("The response is %s!", expensesData.expenses.toString());
     }
@@ -38,19 +38,14 @@ public class MyProject {
       return dates;
     }
 
-    public List<DayData> calculateMonthPreview(String userId){      
+    public Double calculateMonthPreview(String userId){      
       List<Date> sortedDates = new ArrayList<>(getSortedDates(expensesData.expenses));
       System.out.println("Sorted Dates: " + sortedDates);
       // Get the data from the database. In this case, we're gonna get it from another java file.  
       List<DayData> daysData = new ArrayList<>();
-      
       for(int i = 0; i < sortedDates.size(); i++){
-        
         DayData newDay = new DayData(sortedDates.get(i));
         daysData.add(newDay);
-        // daysData.set(i, newDay);
-        // daysData.set(i, sortedDates.get(i))
-        // daysData = (List<DayData>) new DayData(sortedDates.get(i));
       }
       System.out.println("daysData post first FOR: " + daysData);
       for(int i = 0; i < sortedDates.size(); i++){
@@ -65,36 +60,24 @@ public class MyProject {
         }
       }    
       System.out.println("daysData post second: " + daysData);
-      return daysData;
-    }
-
-
-    @GetMapping("/testDaysData")
-    public String testDaysData(@RequestParam(value = "userId", defaultValue = "0") double number) {
-      return String.format("The response is %s!", calculateMonthPreview(null));
-    }
-
-
-    @GetMapping("/days-data-json")
-    public ResponseEntity<List<DayData>> getDaysData(@RequestBody Map<String, Object> payload) {
-        List<DayData> daysData = calculateMonthPreview("userId");
-        return ResponseEntity.ok(daysData);
+      
+      
+      Double monthPreview = 0.0;
+      Double averageDailyGain = daysData.get(0).getIncomes();
+      Double averageDailyLoss = daysData.get(0).getExpenses();
+      for(int i = 1; i < daysData.size(); i++){
+        averageDailyGain = (averageDailyGain + daysData.get(i).getIncomes())/2;
+        averageDailyLoss = (averageDailyLoss + daysData.get(i).getExpenses())/2;
+      }
+      for(int i = 0; i < 30; i ++){
+        monthPreview = monthPreview + (averageDailyGain - averageDailyLoss);
+      }
+      return monthPreview;
     }
 
     @GetMapping("/days-data-string")
-    public String getMonthPreview(@RequestParam(value = "userId", defaultValue = "0") String userId) {
-      return String.format("The response is %s!", calculateMonthPreview(userId).toString());    
+    public ResponseEntity<Double> getMonthPreview(@RequestParam(value = "userId", defaultValue = "0") String userId) {
+      Double monthPreview = calculateMonthPreview(userId);
+      return ResponseEntity.ok(monthPreview);    
     }
-
-    // public ResponseEntity<Double> getMonthPreview(@RequestBody Map<String, Object> payload) {
-      // TODO: Implement the logic to calculate the month preview
-
-      // Double monthPreview = calculateMonthPreview(payload.get("userId").toString());
-      // return ResponseEntity.ok(monthPreview);
-    // }  
-
-
-    // userId is being received. 
-    
-
 }
