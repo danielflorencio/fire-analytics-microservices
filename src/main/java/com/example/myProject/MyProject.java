@@ -1,10 +1,14 @@
 package com.example.myProject;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.myProject.data.expensesData;
 import com.example.myProject.models.DayData;
@@ -13,7 +17,6 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.Map;
 @SpringBootApplication
 @RestController
 public class MyProject {
@@ -40,14 +43,14 @@ public class MyProject {
 
     public Double calculateMonthPreview(String userId){      
       List<Date> sortedDates = new ArrayList<>(getSortedDates(expensesData.expenses));
-      System.out.println("Sorted Dates: " + sortedDates);
+      // System.out.println("Sorted Dates: " + sortedDates);
       // Get the data from the database. In this case, we're gonna get it from another java file.  
       List<DayData> daysData = new ArrayList<>();
       for(int i = 0; i < sortedDates.size(); i++){
         DayData newDay = new DayData(sortedDates.get(i));
         daysData.add(newDay);
       }
-      System.out.println("daysData post first FOR: " + daysData);
+      // System.out.println("daysData post first FOR: " + daysData);
       for(int i = 0; i < sortedDates.size(); i++){
         for(int n = 0; n < expensesData.expenses.size(); n++){
           if(sortedDates.get(i).equals(expensesData.expenses.get(n).getDate())){
@@ -59,7 +62,7 @@ public class MyProject {
           }
         }
       }    
-      System.out.println("daysData post second: " + daysData);
+      // System.out.println("daysData post second: " + daysData);
       
       
       Double monthPreview = 0.0;
@@ -75,9 +78,20 @@ public class MyProject {
       return monthPreview;
     }
 
-    @GetMapping("/days-data-string")
+
+
+    // https://www.youtube.com/watch?v=X2hjlquVess how to fix the cors shit
+    // @RequestMapping(value = "/getUserMonthPreview", method = RequestMethod.POST)
+    // @RequestMapping("/getUserMonthPreview")
+    
+    @GetMapping("/getUserMonthPreview")
+    @CrossOrigin(origins = "http://localhost:5173/") 
+    // @ResponseBody
     public ResponseEntity<Double> getMonthPreview(@RequestParam(value = "userId", defaultValue = "0") String userId) {
       Double monthPreview = calculateMonthPreview(userId);
-      return ResponseEntity.ok(monthPreview);    
+      HttpHeaders headers = new HttpHeaders();
+      headers.add("Status", "ok");
+      // headers.add("Access-Control-Allow-Origin", "*");
+      return ResponseEntity.ok().headers(headers).body(monthPreview);    
     }
 }
