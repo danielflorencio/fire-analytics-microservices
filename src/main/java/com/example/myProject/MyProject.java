@@ -39,28 +39,7 @@ public class MyProject {
     }
 
     public Double calculateMonthPreview(String userId){      
-      List<Date> sortedDates = new ArrayList<>(getSortedDates(expensesData.expenses));
-      // System.out.println("Sorted Dates: " + sortedDates);
-      // Get the data from the database. In this case, we're gonna get it from another java file.  
-      List<DayData> daysData = new ArrayList<>();
-      for(int i = 0; i < sortedDates.size(); i++){
-        DayData newDay = new DayData(sortedDates.get(i));
-        daysData.add(newDay);
-      }
-      // System.out.println("daysData post first FOR: " + daysData);
-      for(int i = 0; i < sortedDates.size(); i++){
-        for(int n = 0; n < expensesData.expenses.size(); n++){
-          if(sortedDates.get(i).equals(expensesData.expenses.get(n).getDate())){
-            if(expensesData.expenses.get(n).getCategory().equals("salary") || expensesData.expenses.get(n).getCategory().equals("Salary")){
-              daysData.get(i).addIncomeValue(expensesData.expenses.get(n).value);              
-            } else{
-              daysData.get(i).addExpenseValue(expensesData.expenses.get(n).value);
-            }
-          }
-        }
-      }    
-      // System.out.println("daysData post second: " + daysData);
-       
+      List<DayData> daysData = getDaysData(userId);
       Double monthPreview = 0.0;
       Double averageDailyGain = daysData.get(0).getIncomes();
       Double averageDailyLoss = daysData.get(0).getExpenses();
@@ -76,27 +55,7 @@ public class MyProject {
 
 
     public Double calculateSixMonthsPreview(String userId){      
-      List<Date> sortedDates = new ArrayList<>(getSortedDates(expensesData.expenses));
-      // System.out.println("Sorted Dates: " + sortedDates);
-      // Get the data from the database. In this case, we're gonna get it from another java file.  
-      List<DayData> daysData = new ArrayList<>();
-      for(int i = 0; i < sortedDates.size(); i++){
-        DayData newDay = new DayData(sortedDates.get(i));
-        daysData.add(newDay);
-      }
-      // System.out.println("daysData post first FOR: " + daysData);
-      for(int i = 0; i < sortedDates.size(); i++){
-        for(int n = 0; n < expensesData.expenses.size(); n++){
-          if(sortedDates.get(i).equals(expensesData.expenses.get(n).getDate())){
-            if(expensesData.expenses.get(n).getCategory().equals("salary") || expensesData.expenses.get(n).getCategory().equals("Salary")){
-              daysData.get(i).addIncomeValue(expensesData.expenses.get(n).value);              
-            } else{
-              daysData.get(i).addExpenseValue(expensesData.expenses.get(n).value);
-            }
-          }
-        }
-      }    
-      // System.out.println("daysData post second: " + daysData);
+      List<DayData> daysData = getDaysData(userId);
        
       Double sixMonthsPreview = 0.0;
       Double averageDailyGain = daysData.get(0).getIncomes();
@@ -111,7 +70,8 @@ public class MyProject {
       return sixMonthsPreview;
     }
 
-    public Double calculateYearPreview(String userId){      
+
+    public List<DayData> getDaysData(String userId){
       List<Date> sortedDates = new ArrayList<>(getSortedDates(expensesData.expenses));
       // System.out.println("Sorted Dates: " + sortedDates);
       // Get the data from the database. In this case, we're gonna get it from another java file.  
@@ -131,9 +91,13 @@ public class MyProject {
             }
           }
         }
-      }    
-      // System.out.println("daysData post second: " + daysData);
-       
+      }
+      return daysData;
+    }
+
+    public Double calculateYearPreview(String userId){ 
+
+      List<DayData> daysData = getDaysData(userId);
       Double yearPreview = 0.0;
       Double averageDailyGain = daysData.get(0).getIncomes();
       Double averageDailyLoss = daysData.get(0).getExpenses();
@@ -148,7 +112,7 @@ public class MyProject {
     }
 
     @GetMapping("/getMonthPreview")
-    @CrossOrigin(origins = "http://localhost:5173/") 
+    @CrossOrigin(origins = {"http://localhost:19000/", "http://localhost:3000/", "http://192.168.0.102:19000"}) 
     public ResponseEntity<Double> getMonthPreview(@RequestParam(value = "userId", defaultValue = "0") String userId) {
       Double monthPreview = calculateMonthPreview(userId);
       HttpHeaders headers = new HttpHeaders();
@@ -156,15 +120,15 @@ public class MyProject {
       return ResponseEntity.ok().headers(headers).body(monthPreview);    
     }
     @GetMapping("/getSixMonthsPreview")
-    @CrossOrigin(origins = "http://localhost:5173/") 
+    @CrossOrigin(origins = {"http://localhost:19000/", "http://localhost:3000/", "http://192.168.0.102:19000"}) 
     public ResponseEntity<Double> getSixMonthsPreview(@RequestParam(value = "userId", defaultValue = "0") String userId) {
       Double monthPreview = calculateSixMonthsPreview(userId);
       HttpHeaders headers = new HttpHeaders();
       headers.add("Status", "ok");
       return ResponseEntity.ok().headers(headers).body(monthPreview);    
     }
-    @GetMapping("/getUserYearPreview")
-    @CrossOrigin(origins = "http://localhost:5173/") 
+    @GetMapping("/getYearPreview")
+    @CrossOrigin(origins = {"http://localhost:19000/", "http://localhost:3000/", "http://192.168.0.102:19000"}) 
     public ResponseEntity<Double> getYearPreview(@RequestParam(value = "userId", defaultValue = "0") String userId) {
       Double monthPreview = calculateYearPreview(userId);
       HttpHeaders headers = new HttpHeaders();
