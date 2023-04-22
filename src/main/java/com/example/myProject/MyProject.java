@@ -38,49 +38,14 @@ public class MyProject {
       return dates;
     }
 
-    public Double calculateMonthPreview(String userId){      
-      List<DayData> daysData = getDaysData(userId);
-      Double monthPreview = 0.0;
-      Double averageDailyGain = daysData.get(0).getIncomes();
-      Double averageDailyLoss = daysData.get(0).getExpenses();
-      for(int i = 1; i < daysData.size(); i++){
-        averageDailyGain = (averageDailyGain + daysData.get(i).getIncomes())/2;
-        averageDailyLoss = (averageDailyLoss + daysData.get(i).getExpenses())/2;
-      }
-      for(int i = 0; i < 30; i ++){
-        monthPreview = monthPreview + (averageDailyGain - averageDailyLoss);
-      }
-      return monthPreview;
-    }
-
-
-    public Double calculateSixMonthsPreview(String userId){      
-      List<DayData> daysData = getDaysData(userId);
-       
-      Double sixMonthsPreview = 0.0;
-      Double averageDailyGain = daysData.get(0).getIncomes();
-      Double averageDailyLoss = daysData.get(0).getExpenses();
-      for(int i = 1; i < daysData.size(); i++){
-        averageDailyGain = (averageDailyGain + daysData.get(i).getIncomes())/2;
-        averageDailyLoss = (averageDailyLoss + daysData.get(i).getExpenses())/2;
-      }
-      for(int i = 0; i < 182; i ++){
-        sixMonthsPreview = sixMonthsPreview + (averageDailyGain - averageDailyLoss);
-      }
-      return sixMonthsPreview;
-    }
-
-
     public List<DayData> getDaysData(String userId){
       List<Date> sortedDates = new ArrayList<>(getSortedDates(expensesData.expenses));
-      // System.out.println("Sorted Dates: " + sortedDates);
       // Get the data from the database. In this case, we're gonna get it from another java file.  
       List<DayData> daysData = new ArrayList<>();
       for(int i = 0; i < sortedDates.size(); i++){
         DayData newDay = new DayData(sortedDates.get(i));
         daysData.add(newDay);
       }
-      // System.out.println("daysData post first FOR: " + daysData);
       for(int i = 0; i < sortedDates.size(); i++){
         for(int n = 0; n < expensesData.expenses.size(); n++){
           if(sortedDates.get(i).equals(expensesData.expenses.get(n).getDate())){
@@ -95,19 +60,35 @@ public class MyProject {
       return daysData;
     }
 
-    public Double calculateYearPreview(String userId){ 
-
-      List<DayData> daysData = getDaysData(userId);
-      Double yearPreview = 0.0;
+    public Double calculateTimePreview(int amountOfDays, List<DayData> daysData){
+      Double preview = 0.0;
       Double averageDailyGain = daysData.get(0).getIncomes();
       Double averageDailyLoss = daysData.get(0).getExpenses();
       for(int i = 1; i < daysData.size(); i++){
         averageDailyGain = (averageDailyGain + daysData.get(i).getIncomes())/2;
         averageDailyLoss = (averageDailyLoss + daysData.get(i).getExpenses())/2;
       }
-      for(int i = 0; i < 365; i ++){
-        yearPreview = yearPreview + (averageDailyGain - averageDailyLoss);
+      for(int i = 0; i < amountOfDays; i ++){
+        preview = preview + (averageDailyGain - averageDailyLoss);
       }
+      return preview;
+    }
+
+    public Double calculateMonthPreview(String userId){      
+      List<DayData> daysData = getDaysData(userId);
+      Double monthPreview = calculateTimePreview(30, daysData);
+      return monthPreview;
+    }
+
+    public Double calculateSixMonthsPreview(String userId){      
+      List<DayData> daysData = getDaysData(userId);
+      Double sixMonthsPreview = calculateTimePreview(182, daysData);
+      return sixMonthsPreview;
+    }
+
+    public Double calculateYearPreview(String userId){ 
+      List<DayData> daysData = getDaysData(userId);
+      Double yearPreview = calculateTimePreview(365, daysData);
       return yearPreview;
     }
 
