@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import com.example.myProject.util.FinancialCalculator;
+
 @SpringBootApplication
 @RestController
 public class MyProject {
@@ -29,17 +31,19 @@ public class MyProject {
       return String.format("The response is %s!", expensesData.expenses.toString());
     }
 
-    public List<Date> getSortedDates(List<Expense> expenses) {
-      List<Date> dates = new ArrayList<>();  
-      for (Expense expense : expenses) {
-          dates.add(expense.getDate());
-      }  
-      Collections.sort(dates);
-      return dates;
-    }
+    // public List<Date> getSortedDates(List<Expense> expenses) {
+    //   List<Date> dates = new ArrayList<>();  
+    //   for (Expense expense : expenses) {
+    //       dates.add(expense.getDate());
+    //   }  
+    //   Collections.sort(dates);
+    //   return dates;
+    // }
 
     public List<DayData> getDaysData(String userId){
-      List<Date> sortedDates = new ArrayList<>(getSortedDates(expensesData.expenses));
+      FinancialCalculator calculator = new FinancialCalculator();
+
+      List<Date> sortedDates = new ArrayList<>(calculator.getSortedDates(expensesData.expenses));
       // Get the data from the database. In this case, we're gonna get it from another java file.  
       List<DayData> daysData = new ArrayList<>();
       for(int i = 0; i < sortedDates.size(); i++){
