@@ -1,8 +1,6 @@
 package com.example.myProject.data;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import com.example.myProject.models.User;
 
 public class usersData {

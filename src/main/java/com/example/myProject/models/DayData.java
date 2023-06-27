@@ -1,17 +1,14 @@
 package com.example.myProject.models;
-import java.util.Date;
-
 import lombok.Getter;
 import lombok.Setter;
-
-@Setter
+import java.util.Date;
 @Getter
+@Setter
 public class DayData {
     public Date date;
     public double incomes;
     public double expenses;
     public double totalBalance;
-
 
     public DayData(Date date){
         this.date = date;
@@ -28,5 +25,12 @@ public class DayData {
             ", day expenses='" + this.expenses + '\'' +
             ", day totalBalance='" + this.totalBalance + '\'' +
             '}';   
+    }
+
+    public void addExpenseValue(double expenseValue){
+        this.expenses += expenseValue;
+    }
+    public void addIncomeValue(double incomeValue){
+        this.incomes += incomeValue;
     }
 }
