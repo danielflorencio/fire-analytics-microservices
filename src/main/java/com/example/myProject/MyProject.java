@@ -134,10 +134,8 @@ public class MyProject {
       // It's gonna be 30 days in the past, the current day, and 30 days in the future. 
 
       // First off, I need to get the total current balance of the user.
+      Double userZeroTotalBalance = usersData.users.get(0).getTotalBalance();
 
-      System.out.println(usersData.users.get(0));
-
-      
       // Then, I need to get the data from all the user's expenses in the last thirty days. 
       // When I have these thirty days of data, I need to calculate the total expenditure and incomes from each day.
       // There I will have the first part of my endpoint's response.
