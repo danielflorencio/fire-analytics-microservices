@@ -65,34 +65,4 @@ public class expensesData {
         expenses.add(new Expense(new Date(2023, 3, 30), "food", "Brunch", 24.9));
     }    
 
-
-    public float getNextMonthPreview(){
-        float totalIncome = 0;
-        float totalExpenses = 0;
-
-        
-        for (Expense expense : expenses) {
-            // If the expense category is "salary", add the value to the total income
-            if (expense.getCategory().equals("salary")) {
-                totalIncome += expense.getValue();
-            }
-            // If the expense category is anything else, add the value to the total expenses
-            else {
-                totalExpenses += expense.getValue();
-            }
-        }
-
-        return totalIncome - totalExpenses;
-    }
-    public float getNextYearPreview(){
-        float response = 0;
-        
-        for(int i = 0; i < expenses.size(); i++){
-            
-        }
-        
-        return response;
-    }
-
-
 }

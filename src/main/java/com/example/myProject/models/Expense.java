@@ -1,6 +1,26 @@
 package com.example.myProject.models;
 import java.util.Date;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "expenses")
 public class Expense {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     public Date date;
     public String category;
     public String title;
@@ -16,32 +36,5 @@ public class Expense {
     @Override
     public String toString() {
         return "Expense [date=" + date + ", category=" + category + ", title=" + title + ", value=" + value + "]</br>";
-    }
-
-    public Date getDate() {
-        return this.date;
-    }
-    public String getCategory() {
-        return this.category;
-    }
-    public String getTitle() {
-        return this.title;
-    }    
-    public double getValue() {
-        return this.value;
-    }
-    
-    // Setters
-    public void setDate(Date date) {
-        this.date = date;
-    }
-    public void setCategory(String category) {
-        this.category = category;
-    }
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    public void setValue(double value) {
-        this.value = value;
     }
 }
