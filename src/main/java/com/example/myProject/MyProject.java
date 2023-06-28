@@ -1,25 +1,7 @@
 package com.example.myProject;
-import org.apache.catalina.connector.Response;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.myProject.data.expensesData;
-import com.example.myProject.data.usersData;
-import com.example.myProject.models.DayData;
-import com.example.myProject.models.Expense;
-import com.example.myProject.models.User;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import com.example.myProject.util.FinancialCalculator;
-
 @SpringBootApplication
 @RestController
 public class MyProject {

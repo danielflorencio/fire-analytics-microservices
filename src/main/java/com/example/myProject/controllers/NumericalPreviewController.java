@@ -45,6 +45,7 @@ public class NumericalPreviewController {
     @CrossOrigin(origins = {"http://localhost:19000/", "http://localhost:3000/", "http://192.168.0.102:19000"}) 
     public ResponseEntity<Double> getYearPreview(@RequestParam(value = "userId", defaultValue = "0") String userId) {
         NumericalPreview yearPreview = new NumericalPreview();
+        yearPreview.setPreviewValue(financialCalculator.calculateYearPreview(expensesData.expenses));
         HttpHeaders headers = new HttpHeaders();
         headers.add("Status", "ok");
         return ResponseEntity.ok().headers(headers).body(yearPreview.getPreviewValue());    
