@@ -6,9 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.myProject.data.expensesData;
-import com.example.myProject.models.NumericalPreview;
 import com.example.myProject.util.FinancialCalculator;
 @RestController
 @RequestMapping("numericalPreview")
@@ -19,7 +17,7 @@ public class NumericalPreviewController {
     @GetMapping("/getMonthPreview")
     @CrossOrigin(origins = {"http://localhost:19000/", "http://localhost:3000/", "http://192.168.0.102:19000"}) 
     public ResponseEntity<Double> getMonthPreview(@RequestParam(value = "userId", defaultValue = "0") String userId) {
-      
+
         // Get the expenses from the database.
 
             // expensesData
@@ -31,24 +29,23 @@ public class NumericalPreviewController {
         headers.add("Status", "ok");
         return ResponseEntity.ok().headers(headers).body(monthPreview);    
     }
+
     @GetMapping("/getSixMonthsPreview")
     @CrossOrigin(origins = {"http://localhost:19000/", "http://localhost:3000/", "http://192.168.0.102:19000"}) 
     public ResponseEntity<Double> getSixMonthsPreview(@RequestParam(value = "userId", defaultValue = "0") String userId) {
-        NumericalPreview sixMonthsPreview = new NumericalPreview();
-        sixMonthsPreview.setPreviewValue(financialCalculator.calculateSixMonthsPreview(expensesData.expenses));
+        Double sixMonthsPreview = financialCalculator.calculateSixMonthsPreview(expensesData.expenses);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Status", "ok");
-        return ResponseEntity.ok().headers(headers).body(sixMonthsPreview.getPreviewValue());    
+        return ResponseEntity.ok().headers(headers).body(sixMonthsPreview);    
     }
 
     @GetMapping("/getYearPreview")
     @CrossOrigin(origins = {"http://localhost:19000/", "http://localhost:3000/", "http://192.168.0.102:19000"}) 
     public ResponseEntity<Double> getYearPreview(@RequestParam(value = "userId", defaultValue = "0") String userId) {
-        NumericalPreview yearPreview = new NumericalPreview();
-        yearPreview.setPreviewValue(financialCalculator.calculateYearPreview(expensesData.expenses));
+        Double yearPreview = financialCalculator.calculateYearPreview(expensesData.expenses);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Status", "ok");
-        return ResponseEntity.ok().headers(headers).body(yearPreview.getPreviewValue());    
+        return ResponseEntity.ok().headers(headers).body(yearPreview);    
     }
 
 }

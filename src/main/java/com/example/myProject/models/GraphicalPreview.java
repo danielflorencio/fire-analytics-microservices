@@ -6,4 +6,8 @@ import lombok.Setter;
 @Getter
 public class GraphicalPreview {
     
+    private String[] labels;
+    private float[] values;
+    private String previewType;
+
 }
