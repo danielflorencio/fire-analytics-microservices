@@ -54,11 +54,11 @@ public class FinancialCalculator {
         return preview;
     }
 
-    // public Double calculateMonthPreview(List<Expense> expenses, String userId){      
-    //   List<DayData> daysData = getDaysData(userId);
-    //   Double monthPreview = calculateTimePreview(30, daysData);
-    //   return monthPreview;
-    // }
+    public Double calculateMonthPreview(List<Expense> expenses){      
+      List<DayData> daysData = getDaysData(expenses);
+      Double monthPreview = calculateTimePreview(expenses, 30);
+      return monthPreview;
+    }
 
     public Double calculateSixMonthsPreview(List<Expense> expenses){      
       List<DayData> daysData = getDaysData(expenses);
@@ -66,9 +66,9 @@ public class FinancialCalculator {
       return sixMonthsPreview;
     }
 
-    // public Double calculateYearPreview(String userId){ 
-    //   List<DayData> daysData = getDaysData(userId);
-    //   Double yearPreview = calculateTimePreview(365, daysData);
-    //   return yearPreview;
-    // }
+    public Double calculateYearPreview(List<Expense> expenses){ 
+      List<DayData> daysData = getDaysData(expenses);
+      Double yearPreview = calculateTimePreview(expenses, 365);
+      return yearPreview;
+    }
 }
