@@ -19,9 +19,7 @@ public class NumericalPreviewController {
     public ResponseEntity<Double> getMonthPreview(@RequestParam(value = "userId", defaultValue = "0") String userId) {
 
         // Get the expenses from the database.
-
             // expensesData
-
         // Get the expenses from the database.
       
         Double monthPreview = financialCalculator.calculateMonthPreview(expensesData.expenses);

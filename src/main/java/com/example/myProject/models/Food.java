@@ -1,9 +1,12 @@
 package com.example.myProject.models;
+import com.example.myProject.DTOs.FoodRequestDTO;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +15,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(of = "id") // indicates that the Id is the primary key.
 public class Food {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,5 +23,11 @@ public class Food {
     private String title;
     private String image;
     private Integer price;
+
+    public Food(FoodRequestDTO data){
+        this.image = data.image();
+        this.price = data.price();
+        this.title = data.title();
+    }
 
 }
