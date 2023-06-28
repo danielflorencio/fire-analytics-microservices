@@ -1,19 +1,31 @@
 package com.example.myProject.models;
 import java.util.Date;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
-@Getter
 @Entity
 @Table(name = "expenses")
+@Setter
+@Getter
 public class Expense {
-    public Date date;
-    public String category;
-    public String title;
-    public double value;
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private Date date;
+    private String category;
+    private String title;
+    private double value;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Expense(Date date, String category, String title, double value) {
         this.date = date;

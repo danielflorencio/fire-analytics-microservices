@@ -1,8 +1,11 @@
 package com.example.myProject.models;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +22,9 @@ public class User {
     private String lastName;
     private Double totalBalance;
     private String password;
-    private Expense[] expenses;
+
+    @OneToMany(mappedBy = "user")
+    private List<Expense> expenses;
 
     public User(String firstName, String lastName, Double totalBalance){
         this.firstName = firstName;
