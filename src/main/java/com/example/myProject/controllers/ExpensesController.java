@@ -2,8 +2,6 @@ package com.example.myProject.controllers;
 import com.example.myProject.data.expensesData;
 import com.example.myProject.models.Expense;
 import com.example.myProject.repositories.ExpenseRepository;
-
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
