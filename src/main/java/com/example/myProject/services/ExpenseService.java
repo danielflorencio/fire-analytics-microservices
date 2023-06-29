@@ -28,7 +28,10 @@ public class ExpenseService {
         Date dateToUse = new Date(currentDate.getYear(), 1, currentDate.getDayOfMonth(), 0, 0, 0);
         // List<Expense> lastMonthExpenses = expenseRepository.findByDateBefore(dateToUse);
         // List<FoodResponseDTO> foodList = repository.findAll().stream().map(FoodResponseDTO::new).toList();
+        // List<ExpenseResponseDTO> lastMonthExpenses = expenseRepository.findAll().stream().map(ExpenseResponseDTO::new).toList();
+        
         List<ExpenseResponseDTO> lastMonthExpenses = expenseRepository.findAll().stream().map(ExpenseResponseDTO::new).toList();
+        System.out.println(expenseRepository.findAll().stream().map(ExpenseResponseDTO::new).toList());
         // return expenseRepository.findByDateBefore(dateToUse);
         // return expenseRepository.findByDateBefore(1);
         return lastMonthExpenses;

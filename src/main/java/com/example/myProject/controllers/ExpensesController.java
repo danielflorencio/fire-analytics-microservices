@@ -18,7 +18,6 @@ public class ExpensesController {
     private ExpenseRepository expenseRepository;
 
     @GetMapping("saveExpenses")
-
     public ResponseEntity<Double> saveExpenses() {
         for (Expense expense : expensesData.expenses) {
             expenseRepository.save(expense);
