@@ -1,5 +1,5 @@
 package com.example.myProject.models;
-import java.util.Date;
+import java.time.LocalDate;
 
 import com.example.myProject.DTOs.ExpenseRequestDTO;
 
@@ -27,7 +27,7 @@ public class Expense {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date date;
+    private LocalDate date;
     private String category;
     private String title;
     private double value;
@@ -43,7 +43,7 @@ public class Expense {
         this.value = expenseRequestData.value();
     }
 
-    public Expense(Date date, String category, String title, double value) {
+    public Expense(LocalDate date, String category, String title, double value) {
         this.date = date;
         this.category = category;
         this.title = title;
