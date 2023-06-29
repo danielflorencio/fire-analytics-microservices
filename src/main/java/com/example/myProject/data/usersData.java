@@ -7,7 +7,7 @@ public class usersData {
     public static List<User> users = new ArrayList<>();
 
     static {
-        users.add(new User("Daniel", "Florencio", 1159.7));
+        users.add(new User("Daniel", "Florencio", 1159.7, "danielflorencio@gmail.com"));
     }
 
 }

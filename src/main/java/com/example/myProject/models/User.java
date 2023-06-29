@@ -19,6 +19,7 @@ public class User {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String email;
     private String firstName;
     private String lastName;
     private Double totalBalance;
@@ -27,7 +28,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Expense> expenses;
 
-    public User(String firstName, String lastName, Double totalBalance){
+    public User(String firstName, String lastName, Double totalBalance, String email){
+        this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.totalBalance = totalBalance;
