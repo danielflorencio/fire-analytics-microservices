@@ -11,8 +11,8 @@ public class MyProject {
     public static void main(String[] args) {
       SpringApplication.run(MyProject.class, args);
       LocalDate currentDate = LocalDate.now();
-      System.out.println("CURRENT DATE: ");
-      System.out.println(currentDate);
+      // System.out.println("CURRENT DATE: ");
+      // System.out.println(currentDate);
     }
     
 
