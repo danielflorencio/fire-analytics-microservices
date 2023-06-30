@@ -35,13 +35,10 @@ public class FinancialCalculator {
         // List<LocalDate> sortedDates = new ArrayList<>(getSortedDates(expenses));
         List<DayData> daysData = new ArrayList<>();
 
-
         // for (int i = 0; i < sortedDates.size(); i++) {
             // DayData newDay = new DayData(sortedDates.get(i));
             // daysData.add(newDay);
         // }
-
-
 
         for (int i = 0; i < daysData.size(); i++) {
             for (int n = 0; n < expenses.size(); n++) {
@@ -59,13 +56,6 @@ public class FinancialCalculator {
 
 
     public List<DayData> getIntraDaysData(List<ExpenseResponseDTO> expenses) {
-
-        System.out.println("EXPENSES RECEIVED ON GETINTRADAYSDATA: ");
-        System.out.println("----------------");
-        System.out.println("----------------");
-        System.out.println("----------------");
-        System.out.println("----------------");
-        System.out.println(expenses);
 
         List<LocalDate> sortedDates = getSortedDates(expenses);
 
@@ -106,13 +96,6 @@ public class FinancialCalculator {
         }
         return preview;
     }
-
-
-
-
-
-
-
 
     public Double calculateMonthPreview(List<Expense> expenses){      
     //   List<DayData> daysData = getDaysData(expenses);

@@ -1,8 +1,6 @@
 package com.example.myProject.models;
 import java.time.LocalDate;
-
 import com.example.myProject.DTOs.ExpenseRequestDTO;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,7 +31,7 @@ public class Expense {
     private double value;
 
     @ManyToOne
-    @JoinColumn(name = "user_id") // Old user_id
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Expense(ExpenseRequestDTO expenseRequestData) {

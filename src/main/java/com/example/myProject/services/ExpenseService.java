@@ -27,9 +27,17 @@ public class ExpenseService {
 
     public GraphicalPreview getOneMonthGraphicalPreview(LocalDate startDate, LocalDate endDate) {
 
+        /*
+         * Pretty Straight forward.
+         * The first line gets the all the expenses from the last month.
+         * The second lines call the financial calculator to organize the data from these thirty days.
+         * The third lines creates a new GraphicalPreview object that will handle this calculation in the class's constructor.
+         */
+
         List<ExpenseResponseDTO> lastMonthExpenses = expenseRepository.findByDateBetween(startDate, endDate).stream().map(ExpenseResponseDTO::new).toList();
         List<DayData> lastMonthIntraDayData = financialCalculator.getIntraDaysData(lastMonthExpenses);
         GraphicalPreview graphicalPreview = new GraphicalPreview(lastMonthIntraDayData);
+
         return graphicalPreview;
     }
 }

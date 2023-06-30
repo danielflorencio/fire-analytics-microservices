@@ -1,7 +1,5 @@
 package com.example.myProject.DTOs;
-
 import java.time.LocalDate;
-
 import com.example.myProject.models.Expense;
 
 public record ExpenseResponseDTO(Long id, String title, String category, double value, LocalDate date) {
