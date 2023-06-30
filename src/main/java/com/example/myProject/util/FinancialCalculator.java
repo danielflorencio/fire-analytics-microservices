@@ -92,9 +92,6 @@ public class FinancialCalculator {
         return daysData;
     }
 
-
-
-
     public Double calculateTimePreview(List<Expense> expenses, int amountOfDays) {
         List<DayData> daysData = getDaysData(expenses);
         Double preview = 0.0;
