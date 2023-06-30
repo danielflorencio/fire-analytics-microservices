@@ -3,13 +3,13 @@ import com.example.myProject.models.DayData;
 import com.example.myProject.models.Expense;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class FinancialCalculator {
     
-    public List<Date> getSortedDates(List<Expense> expenses) {
-        List<Date> dates = new ArrayList<>();
+    public List<LocalDate> getSortedDates(List<Expense> expenses) {
+        List<LocalDate> dates = new ArrayList<>();
         for (Expense expense : expenses) {
             dates.add(expense.getDate());
         }
@@ -18,7 +18,7 @@ public class FinancialCalculator {
     }
 
     public List<DayData> getDaysData(List<Expense> expenses) {
-        List<Date> sortedDates = new ArrayList<>(getSortedDates(expenses));
+        List<LocalDate> sortedDates = new ArrayList<>(getSortedDates(expenses));
         List<DayData> daysData = new ArrayList<>();
         for (int i = 0; i < sortedDates.size(); i++) {
             DayData newDay = new DayData(sortedDates.get(i));

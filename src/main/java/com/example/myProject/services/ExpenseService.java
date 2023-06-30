@@ -21,16 +21,22 @@ public class ExpenseService {
         this.expenseRepository = expenseRepository;
     }
 
+    public List<Expense> getExpensesBetweenDates(LocalDate startDate, LocalDate endDate){
+        return expenseRepository.findByDateBetween(startDate, endDate);
+    }
+
     public List<ExpenseResponseDTO> getOneMonthGraphicalPreview() {
 
         LocalDate currentDate = LocalDate.now();
         // Date dateToUse = new Date(currentDate.getYear(), currentDate.getMonth().minus(1).getValue(), currentDate.getDayOfMonth(), 0, 0, 0);
         // Date dateToUse = new Date(currentDate.getYear(), 1, currentDate.getDayOfMonth(), 0, 0, 0);
         // List<Expense> lastMonthExpenses = expenseRepository.findByDateBefore(dateToUse);
+        // List<Expense> lastMonthExpenses = expenseRepository.findByDateBefore(currentDate);
         // List<FoodResponseDTO> foodList = repository.findAll().stream().map(FoodResponseDTO::new).toList();
         // List<ExpenseResponseDTO> lastMonthExpenses = expenseRepository.findAll().stream().map(ExpenseResponseDTO::new).toList();
         
-        List<ExpenseResponseDTO> lastMonthExpenses = expenseRepository.findAll().stream().map(ExpenseResponseDTO::new).toList();
+        List<ExpenseResponseDTO> lastMonthExpenses = expenseRepository.findByDateBetween(currentDate.minusMonths(4), currentDate).stream().map(ExpenseResponseDTO::new).toList();
+        // List<ExpenseResponseDTO> lastMonthExpenses = expenseRepository.findAll().stream().map(ExpenseResponseDTO::new).toList();
 
         
 

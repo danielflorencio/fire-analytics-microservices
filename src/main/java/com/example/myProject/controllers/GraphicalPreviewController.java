@@ -1,4 +1,5 @@
 package com.example.myProject.controllers;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,14 +11,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.myProject.DTOs.ExpenseResponseDTO;
 import com.example.myProject.data.usersData;
+import com.example.myProject.models.DayData;
 import com.example.myProject.models.Expense;
 import com.example.myProject.models.User;
 import com.example.myProject.repositories.ExpenseRepository;
 import com.example.myProject.services.ExpenseService;
+import com.example.myProject.util.FinancialCalculator;
 
 @RestController
 @RequestMapping("graphicalPreview")
 public class GraphicalPreviewController {
+
+  FinancialCalculator financialCalculator = new FinancialCalculator();
 
   private final ExpenseService expenseService;
 
@@ -36,6 +41,27 @@ public class GraphicalPreviewController {
 
     List<ExpenseResponseDTO> lastMonthExpenses = expenseService.getOneMonthGraphicalPreview();
 
+    System.out.println("EXPENSE LIST");
+    System.out.println(lastMonthExpenses.size());
+    System.out.println(lastMonthExpenses);
+
+    List<Expense> expenses = new ArrayList<>();
+    for(ExpenseResponseDTO dto : lastMonthExpenses){
+      Expense expense = new Expense(dto.date(), dto.category(), dto.title(), dto.value());
+      expenses.add(expense);
+    }
+
+    List<DayData> thirtyPastDays = new ArrayList<>();
+    thirtyPastDays = financialCalculator.getDaysData(expenses);
+
+    System.out.println("DAYSDATA: ");
+    System.out.println(thirtyPastDays.size());
+    System.out.println(thirtyPastDays);
+
+
+    for(int i = 0; i < 30; i++){
+
+    }    
     // First off, I need to get the total current b alance of the user.
     // Double userZeroTotalBalance = usersData.users.get(0).getTotalBalance();
 

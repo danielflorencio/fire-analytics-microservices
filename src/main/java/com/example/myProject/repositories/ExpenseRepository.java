@@ -6,4 +6,5 @@ import com.example.myProject.models.Expense;
 
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     List<Expense> findByDateBefore(LocalDate date);
+    List<Expense> findByDateBetween(LocalDate startDate, LocalDate endDate);
 }

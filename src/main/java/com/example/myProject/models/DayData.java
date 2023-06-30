@@ -1,16 +1,20 @@
 package com.example.myProject.models;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.Date;
+import java.time.LocalDate;
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class DayData {
-    public Date date;
+    public LocalDate date;
     public double incomes;
     public double expenses;
     public double totalBalance;
 
-    public DayData(Date date){
+    public DayData(LocalDate date){
         this.date = date;
         this.incomes = 0;
         this.expenses = 0;
