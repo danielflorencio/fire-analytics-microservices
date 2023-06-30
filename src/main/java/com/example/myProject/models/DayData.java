@@ -12,13 +12,13 @@ public class DayData {
     public LocalDate date;
     public double incomes;
     public double expenses;
-    public double totalBalance;
+    public double totalBalanceVariance;
 
     public DayData(LocalDate date){
         this.date = date;
         this.incomes = 0;
         this.expenses = 0;
-        this.totalBalance = this.incomes - this.expenses;
+        this.totalBalanceVariance = this.incomes - this.expenses;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class DayData {
             "Date=" + this.date +
             ", day incomes='" + this.incomes + '\'' +
             ", day expenses='" + this.expenses + '\'' +
-            ", day totalBalance='" + this.totalBalance + '\'' +
+            ", day totalBalanceVariance='" + this.totalBalanceVariance + '\'' +
             '}';   
     }
 
