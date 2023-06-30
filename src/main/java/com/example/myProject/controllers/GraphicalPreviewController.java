@@ -40,11 +40,9 @@ public class GraphicalPreviewController {
 
     // I need to remember to change this later.
     // The argument for the function below should be received in the request of the endpoint.
-    List<DayData> lastMonthDayData = expenseService.getOneMonthGraphicalPreview(LocalDate.of(2023, 1, 1), LocalDate.of(2023, 3, 1));
-
     // First off, I need to get the total current balance of the user.
 
-    GraphicalPreview graphicalPreview = new GraphicalPreview(lastMonthDayData);
+    GraphicalPreview graphicalPreview = expenseService.getOneMonthGraphicalPreview(LocalDate.of(2023, 1, 1), LocalDate.of(2023, 3, 1));
 
     // Then, I need to get the data from all the user's expenses in the last thirty days. 
     // When I have these thirty days of data, I need to calculate the total expenditure and incomes from each day.

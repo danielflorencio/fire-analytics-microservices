@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import com.example.myProject.DTOs.ExpenseResponseDTO;
 import com.example.myProject.models.DayData;
 import com.example.myProject.models.Expense;
+import com.example.myProject.models.GraphicalPreview;
 import com.example.myProject.repositories.ExpenseRepository;
 import com.example.myProject.util.FinancialCalculator;
 import java.time.LocalDate;
@@ -24,13 +25,11 @@ public class ExpenseService {
         return expenseRepository.findByDateBetween(startDate, endDate);
     }
 
-    public List<DayData> getOneMonthGraphicalPreview(LocalDate startDate, LocalDate endDate) {
+    public GraphicalPreview getOneMonthGraphicalPreview(LocalDate startDate, LocalDate endDate) {
 
         List<ExpenseResponseDTO> lastMonthExpenses = expenseRepository.findByDateBetween(startDate, endDate).stream().map(ExpenseResponseDTO::new).toList();
-
         List<DayData> lastMonthIntraDayData = financialCalculator.getIntraDaysData(lastMonthExpenses);
-        System.out.println("Last Month Intra Day Data: ");
-        System.out.println(lastMonthIntraDayData);
-        return lastMonthIntraDayData;
+        GraphicalPreview graphicalPreview = new GraphicalPreview(lastMonthIntraDayData);
+        return graphicalPreview;
     }
 }
