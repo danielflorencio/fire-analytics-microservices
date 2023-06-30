@@ -33,8 +33,10 @@ public class DayData {
 
     public void addExpenseValue(double expenseValue){
         this.expenses += expenseValue;
+        this.totalBalanceVariance = this.incomes - this.expenses;
     }
     public void addIncomeValue(double incomeValue){
         this.incomes += incomeValue;
+        this.totalBalanceVariance = this.incomes - this.expenses;
     }
 }

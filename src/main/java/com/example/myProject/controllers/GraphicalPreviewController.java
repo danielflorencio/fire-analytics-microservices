@@ -41,22 +41,19 @@ public class GraphicalPreviewController {
     // The argument for the function below should be received in the request of the endpoint.    
     // List<ExpenseResponseDTO> lastMonthExpenses = expenseService.getOneMonthGraphicalPreview(expensesData.expenses.get(0).getDate(), expensesData.expenses.get(expensesData.expenses.size() - 1).getDate());
     List<DayData> lastMonthDayData = expenseService.getOneMonthGraphicalPreview(expensesData.expenses.get(0).getDate(), expensesData.expenses.get(expensesData.expenses.size() - 1).getDate());
-    System.out.println("EXPENSE LIST");
-    // System.out.println(lastMonthExpenses.size());
+    // System.out.println("EXPENSE LIST");
+    // // System.out.println(lastMonthExpenses.size());
     // System.out.println(lastMonthExpenses);
 
     List<Expense> expenses = new ArrayList<>();
-    // for(ExpenseResponseDTO dto : lastMonthExpenses){
-      // Expense expense = new Expense(dto.date(), dto.category(), dto.title(), dto.value());
-      // expenses.add(expense);
-    // }
+ 
 
     List<DayData> thirtyPastDays = new ArrayList<>();
     thirtyPastDays = financialCalculator.getDaysData(expenses);
 
-    System.out.println("DAYSDATA: ");
-    System.out.println(thirtyPastDays.size());
-    System.out.println(thirtyPastDays);
+    // System.out.println("DAYSDATA: ");
+    // System.out.println(thirtyPastDays.size());
+    // System.out.println(thirtyPastDays);
 
     // First off, I need to get the total current b alance of the user.
     // Double userZeroTotalBalance = usersData.users.get(0).getTotalBalance();

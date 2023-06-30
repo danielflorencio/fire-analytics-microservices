@@ -60,6 +60,13 @@ public class FinancialCalculator {
 
     public List<DayData> getIntraDaysData(List<ExpenseResponseDTO> expenses) {
 
+        System.out.println("EXPENSES RECEIVED ON GETINTRADAYSDATA: ");
+        System.out.println("----------------");
+        System.out.println("----------------");
+        System.out.println("----------------");
+        System.out.println("----------------");
+        System.out.println(expenses);
+
         List<LocalDate> sortedDates = getSortedDates(expenses);
 
         List<LocalDate> actualDatesToUse = getDatesBetween(sortedDates.get(0), sortedDates.get(sortedDates.size() - 1));
@@ -73,7 +80,7 @@ public class FinancialCalculator {
 
         for (int i = 0; i < daysData.size(); i++) {
             for (int n = 0; n < expenses.size(); n++) {
-                if (daysData.get(i).equals(expenses.get(n).date())) {
+                if (daysData.get(i).getDate().equals(expenses.get(n).date())) {
                     if (expenses.get(n).category().equalsIgnoreCase("salary")) {
                         daysData.get(i).addIncomeValue(expenses.get(n).value());
                     } else {
