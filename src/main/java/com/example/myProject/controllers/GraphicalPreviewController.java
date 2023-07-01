@@ -1,10 +1,6 @@
 package com.example.myProject.controllers;
 import java.time.LocalDate;
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,16 +40,17 @@ public class GraphicalPreviewController {
   @GetMapping("/getGraphicalPreview")
   @CrossOrigin(origins = {"*"})
   // Query: http://localhost:8080/graphicalPreview/getGraphicalPreview?initialDate=2023-01-01&finalDate=2023-02-26
-  public ResponseEntity<GraphicalPreview> getSixMonthsGraphicalPreviewResponse(
+  public ResponseEntity<GraphicalPreview> getGraphicalPreviewResponse(
     @RequestParam(value = "email", defaultValue = "default@email.com") String email, 
     @RequestParam LocalDate initialDate, 
     @RequestParam LocalDate finalDate
     )
     {
-    System.out.println("INITIAL DATE: ");
-    System.out.println(initialDate);
-    System.out.println("FINAL DATE:");
-    System.out.println(finalDate);
+
+    // System.out.println("INITIAL DATE ON GETGRAPHICALPREVIEW: ");
+    // System.out.println(initialDate);
+    // System.out.println("FINAL DATE ON GETGRAPHICALPREVIEW: ");
+    // System.out.println(finalDate);
     GraphicalPreview graphicalPreview = expenseService.getGraphicalPreview(initialDate, finalDate);
 
     return ResponseEntity.ok().body(graphicalPreview);
