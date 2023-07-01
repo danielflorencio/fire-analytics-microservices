@@ -40,4 +40,21 @@ public class ExpenseService {
 
         return graphicalPreview;
     }
+
+    public GraphicalPreview getGraphicalPreview(LocalDate startDate, LocalDate endDate){
+        List<ExpenseResponseDTO> pastExpenses = expenseRepository.findByDateBetween(startDate, endDate).stream().map(ExpenseResponseDTO::new).toList();
+        List<DayData> pastIntraDaysData = financialCalculator.getIntraDaysData(pastExpenses);
+        GraphicalPreview graphicalPreview = new GraphicalPreview(pastIntraDaysData);
+        return graphicalPreview;
+    }
+
+    public GraphicalPreview getSixMonthsGraphicalPreview(LocalDate startDate, LocalDate endDate){
+
+
+
+
+        GraphicalPreview graphicalPreview = new GraphicalPreview();
+        return graphicalPreview;
+    }
+
 }

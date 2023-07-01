@@ -20,10 +20,7 @@ public class GraphicalPreview {
     public GraphicalPreview(List<DayData> daysData){
 
         List<LocalDate> dates = new ArrayList<>();
-        double[] graphicValues = new double[daysData.size() + 30];
-        // The size of the array must be daysData.size() plus thirty.
-        // daysData.size() is because of the thirty past days data.
-        // The plus thirty accounts for the future thirty days of the preview.
+        double[] graphicValues = new double[daysData.size()*2];
 
         for(int i = 0; i < daysData.size(); i++){
             dates.add(daysData.get(i).getDate());
@@ -40,7 +37,7 @@ public class GraphicalPreview {
 
         for(int i = 0; i < daysData.size(); i++){
             dates.add(daysData.get(i).getDate().plusDays(30));
-            graphicValues[i + 30] = this.averageDailyIncomeVariation;
+            graphicValues[i + daysData.size()] = this.averageDailyIncomeVariation;
         }
 
         this.labels = dates;
