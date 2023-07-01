@@ -43,6 +43,7 @@ public class GraphicalPreviewController {
 
   @GetMapping("/getGraphicalPreview")
   @CrossOrigin(origins = {"*"})
+  // Query: http://localhost:8080/graphicalPreview/getGraphicalPreview?initialDate=2023-01-01&finalDate=2023-02-26
   public ResponseEntity<GraphicalPreview> getSixMonthsGraphicalPreviewResponse(
     @RequestParam(value = "email", defaultValue = "default@email.com") String email, 
     @RequestParam LocalDate initialDate, 
@@ -50,19 +51,7 @@ public class GraphicalPreviewController {
     )
     {
       
-
-    // LocalDate newInitialDate = LocalDate.parse(initialDate);
-    // LocalDate newFinalDate = LocalDate.parse(finalDate);
-
-    // System.out.println(finalDate);
-
     GraphicalPreview graphicalPreview = expenseService.getGraphicalPreview(initialDate, finalDate);
-    
-    // return ResponseEntity.ok().body(graphicalPreview);
-    // System.out.println("INITIAL DATE: ");
-    // System.out.println(new);
-    // System.out.println("FINAL DATE: ");
-    // System.out.println(finalDate);
 
     return ResponseEntity.ok().body(graphicalPreview);
   }

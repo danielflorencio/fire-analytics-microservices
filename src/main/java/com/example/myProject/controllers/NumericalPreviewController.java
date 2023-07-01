@@ -15,7 +15,7 @@ public class NumericalPreviewController {
     FinancialCalculator financialCalculator = new FinancialCalculator();
 
     @GetMapping("/getMonthPreview")
-    @CrossOrigin(origins = {"http://localhost:19000/", "http://localhost:3000/", "http://192.168.0.102:19000"}) 
+    @CrossOrigin(origins = {"*"}) 
     public ResponseEntity<Double> getMonthPreview(@RequestParam(value = "userId", defaultValue = "0") String userId) {
 
         // Get the expenses from the database.
@@ -29,7 +29,7 @@ public class NumericalPreviewController {
     }
 
     @GetMapping("/getSixMonthsPreview")
-    @CrossOrigin(origins = {"http://localhost:19000/", "http://localhost:3000/", "http://192.168.0.102:19000"}) 
+    @CrossOrigin(origins = {"*"}) 
     public ResponseEntity<Double> getSixMonthsPreview(@RequestParam(value = "userId", defaultValue = "0") String userId) {
         Double sixMonthsPreview = financialCalculator.calculateSixMonthsPreview(expensesData.expenses);
         HttpHeaders headers = new HttpHeaders();
@@ -38,7 +38,7 @@ public class NumericalPreviewController {
     }
 
     @GetMapping("/getYearPreview")
-    @CrossOrigin(origins = {"http://localhost:19000/", "http://localhost:3000/", "http://192.168.0.102:19000"}) 
+    @CrossOrigin(origins = {"*"}) 
     public ResponseEntity<Double> getYearPreview(@RequestParam(value = "userId", defaultValue = "0") String userId) {
         Double yearPreview = financialCalculator.calculateYearPreview(expensesData.expenses);
         HttpHeaders headers = new HttpHeaders();
