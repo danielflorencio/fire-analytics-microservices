@@ -50,7 +50,10 @@ public class GraphicalPreviewController {
     @RequestParam LocalDate finalDate
     )
     {
-      
+    System.out.println("INITIAL DATE: ");
+    System.out.println(initialDate);
+    System.out.println("FINAL DATE:");
+    System.out.println(finalDate);
     GraphicalPreview graphicalPreview = expenseService.getGraphicalPreview(initialDate, finalDate);
 
     return ResponseEntity.ok().body(graphicalPreview);

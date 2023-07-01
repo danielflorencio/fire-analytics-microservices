@@ -7,8 +7,12 @@ import com.example.myProject.models.Expense;
 import com.example.myProject.models.GraphicalPreview;
 import com.example.myProject.repositories.ExpenseRepository;
 import com.example.myProject.util.FinancialCalculator;
+
+import jakarta.annotation.PostConstruct;
+
 import java.time.LocalDate;
 import java.util.List;
+import com.example.myProject.data.expensesData;
 
 @Service
 public class ExpenseService {
@@ -23,6 +27,13 @@ public class ExpenseService {
 
     public List<Expense> getExpensesBetweenDates(LocalDate startDate, LocalDate endDate){
         return expenseRepository.findByDateBetween(startDate, endDate);
+    }
+
+    @PostConstruct
+    public void saveExpensesOnStartup() {
+        for (Expense expense : expensesData.expenses) {
+            expenseRepository.save(expense);
+        }
     }
 
     public GraphicalPreview getOneMonthGraphicalPreview(LocalDate startDate, LocalDate endDate) {
@@ -49,10 +60,6 @@ public class ExpenseService {
     }
 
     public GraphicalPreview getSixMonthsGraphicalPreview(LocalDate startDate, LocalDate endDate){
-
-
-
-
         GraphicalPreview graphicalPreview = new GraphicalPreview();
         return graphicalPreview;
     }
