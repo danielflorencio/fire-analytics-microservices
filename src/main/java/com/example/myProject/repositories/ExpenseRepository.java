@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 // import org.springframework.data.jpa.repository.Query;
 import com.example.myProject.models.Expense;
-@Repository
+// @Repository
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     List<Expense> findByDateBefore(LocalDate date);
 

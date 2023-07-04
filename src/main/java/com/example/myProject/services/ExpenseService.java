@@ -18,6 +18,7 @@ import com.example.myProject.exceptions.NoDataFoundException;
 @Service
 public class ExpenseService {
     
+    @Autowired
     private final ExpenseRepository expenseRepository;
 
     FinancialCalculator financialCalculator = new FinancialCalculator();
