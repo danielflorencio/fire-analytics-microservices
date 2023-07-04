@@ -13,16 +13,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("expenses")
 public class ExpensesController {
     
-    @Autowired
-    private ExpenseRepository expenseRepository;
-
-    @GetMapping("saveExpenses")
-    public ResponseEntity<Double> saveExpenses() {
-        for (Expense expense : expensesData.expenses) {
-            expenseRepository.save(expense);
-        }
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Status", "ok");
-        return ResponseEntity.ok().headers(headers).body(1d); 
-    }
 }
