@@ -17,11 +17,11 @@ import com.example.myProject.exceptions.NoDataFoundException;
 
 @Service
 public class ExpenseService {
+    
     private final ExpenseRepository expenseRepository;
 
     FinancialCalculator financialCalculator = new FinancialCalculator();
 
-    @Autowired
     public ExpenseService(ExpenseRepository expenseRepository) {
         this.expenseRepository = expenseRepository;
     }
@@ -44,21 +44,21 @@ public class ExpenseService {
         }
     }
 
-    public GraphicalPreview getOneMonthGraphicalPreview(LocalDate startDate, LocalDate endDate) {
+    // public GraphicalPreview getOneMonthGraphicalPreview(LocalDate startDate, LocalDate endDate) {
 
-        /*
-         * Pretty Straight forward.
-         * The first line gets the all the expenses from the last month.
-         * The second lines call the financial calculator to organize the data from these thirty days.
-         * The third lines creates a new GraphicalPreview object that will handle this calculation in the class's constructor.
-         */
+    //     /*
+    //      * Pretty Straight forward.
+    //      * The first line gets the all the expenses from the last month.
+    //      * The second lines call the financial calculator to organize the data from these thirty days.
+    //      * The third lines creates a new GraphicalPreview object that will handle this calculation in the class's constructor.
+    //      */
 
-        List<ExpenseResponseDTO> lastMonthExpenses = expenseRepository.findByDateBetween(startDate, endDate).stream().map(ExpenseResponseDTO::new).toList();
-        List<DayData> lastMonthIntraDayData = financialCalculator.getIntraDaysData(lastMonthExpenses);
-        GraphicalPreview graphicalPreview = new GraphicalPreview(lastMonthIntraDayData);
+    //     List<ExpenseResponseDTO> lastMonthExpenses = expenseRepository.findByDateBetween(startDate, endDate).stream().map(ExpenseResponseDTO::new).toList();
+    //     List<DayData> lastMonthIntraDayData = financialCalculator.getIntraDaysData(lastMonthExpenses);
+    //     GraphicalPreview graphicalPreview = new GraphicalPreview(lastMonthIntraDayData);
 
-        return graphicalPreview;
-    }
+    //     return graphicalPreview;
+    // }
 
     public GraphicalPreview getGraphicalPreview(LocalDate startDate, LocalDate endDate){
         List<ExpenseResponseDTO> pastExpenses = expenseRepository.findByDateBetween(startDate, endDate).stream().map(ExpenseResponseDTO::new).toList();
