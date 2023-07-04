@@ -13,6 +13,7 @@ import jakarta.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.List;
 import com.example.myProject.data.expensesData;
+import com.example.myProject.exceptions.NoDataFoundException;
 
 @Service
 public class ExpenseService {
@@ -26,7 +27,14 @@ public class ExpenseService {
     }
 
     public List<Expense> getExpensesBetweenDates(LocalDate startDate, LocalDate endDate){
-        return expenseRepository.findByDateBetween(startDate, endDate);
+
+        List<Expense> expenses = expenseRepository.findByDateBetween(startDate, endDate);
+        
+        if(expenses.isEmpty()){
+            throw new NoDataFoundException();
+        }
+        
+        return expenses;
     }
 
     @PostConstruct
@@ -54,12 +62,17 @@ public class ExpenseService {
 
     public GraphicalPreview getGraphicalPreview(LocalDate startDate, LocalDate endDate){
         List<ExpenseResponseDTO> pastExpenses = expenseRepository.findByDateBetween(startDate, endDate).stream().map(ExpenseResponseDTO::new).toList();
+
+        if(pastExpenses.isEmpty()){
+            throw new NoDataFoundException();
+        }
         
         // I have to create an error handler for when the app doesn't find any expenses.
         
         System.out.println("PAST EXPENSES SIZE: ");
         System.out.println(pastExpenses.size());
         List<DayData> pastIntraDaysData = financialCalculator.getIntraDaysData(pastExpenses);
+ 
         GraphicalPreview graphicalPreview = new GraphicalPreview(pastIntraDaysData);
         return graphicalPreview;
     }

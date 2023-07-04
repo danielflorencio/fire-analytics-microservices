@@ -20,7 +20,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "id") // This indicates the primary key of the entity.
 public class Expense {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

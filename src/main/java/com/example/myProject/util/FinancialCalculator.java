@@ -61,7 +61,7 @@ public class FinancialCalculator {
 
         List<LocalDate> actualDatesToUse = getDatesBetween(sortedDates.get(0), sortedDates.get(sortedDates.size() - 1));
 
-        List<DayData> daysData = new ArrayList();
+        List<DayData> daysData = new ArrayList<>();
 
         for(int i = 0; i < actualDatesToUse.size(); i ++){
             DayData newDayData = new DayData(actualDatesToUse.get(i));

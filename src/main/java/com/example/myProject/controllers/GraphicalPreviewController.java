@@ -1,6 +1,7 @@
 package com.example.myProject.controllers;
 import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,10 +48,6 @@ public class GraphicalPreviewController {
     )
     {
 
-    // System.out.println("INITIAL DATE ON GETGRAPHICALPREVIEW: ");
-    // System.out.println(initialDate);
-    // System.out.println("FINAL DATE ON GETGRAPHICALPREVIEW: ");
-    // System.out.println(finalDate);
     GraphicalPreview graphicalPreview = expenseService.getGraphicalPreview(initialDate, finalDate);
 
     return ResponseEntity.ok().body(graphicalPreview);
@@ -60,10 +57,14 @@ public class GraphicalPreviewController {
   @CrossOrigin(origins = {"*"})
   public ResponseEntity<GraphicalPreview> getOneYearGraphicalPreviewResponse(@RequestParam(value = "email", defaultValue = "default@email.com") String email){
 
-    LocalDate endDateToFetch = LocalDate.of(2023, 3, 1);
-    GraphicalPreview graphicalPreview = expenseService.getOneMonthGraphicalPreview(endDateToFetch.minusDays(365), endDateToFetch);
+    // try{
+      LocalDate endDateToFetch = LocalDate.of(2023, 3, 1);
+      GraphicalPreview graphicalPreview = expenseService.getOneMonthGraphicalPreview(endDateToFetch.minusDays(365), endDateToFetch);
+      return ResponseEntity.ok().body(graphicalPreview);
+    // } catch (MyResourceNotFoundException exc){
+      // throw new ResponseStatusException(HttpStatus.NOT_FOUND, exc);
+    // }
 
-    return ResponseEntity.ok().body(graphicalPreview);
   }
 
 
