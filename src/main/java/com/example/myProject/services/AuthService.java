@@ -11,14 +11,26 @@ import com.example.myProject.models.User;
 import com.example.myProject.repositories.UsersRepository;
 
 @Service
-// public class AuthService implements UserDetailsService {
-public interface AuthService {
+public class AuthService implements UserDetailsService {
+
+    @Autowired
+    UsersRepository repository;
+
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // TODO Auto-generated method stub
+        return repository.findByEmail(username);
+        // throw new UnsupportedOperationException("Unimplemented method 'loadUserByUsername'");
+    }
+
+// public interface AuthService {
 
     // @Autowired
     // private UsersRepository userRepository;
 
-    public void saveUser(User user);
-    public User getUserByEmailAndPassword(String email, String password) throws UserNotFoundException;
+    // public void saveUser(User user);
+    // public User getUserByEmailAndPassword(String email, String password) throws UserNotFoundException;
 
     // @Override
     // public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
