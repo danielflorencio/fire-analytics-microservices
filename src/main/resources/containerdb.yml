@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+    db:
+      container_name: FDB
+      image: postgres:14.6
+      environment:
+        - POSTGRES_USER=fire_user
+        - POSTGRES_PASSWORD=fire_root
+      
+
+      ports:
+        - 5432:5432
