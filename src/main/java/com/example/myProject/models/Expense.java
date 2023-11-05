@@ -1,6 +1,8 @@
 package com.example.myProject.models;
 import java.time.LocalDate;
 import com.example.myProject.DTOs.ExpenseRequestDTO;
+import com.example.myProject.domain.user.User;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
