@@ -9,13 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MyProject {
     
-  @Bean public BCryptPasswordEncoder bCryptPasswordEncoder() {
-    return new BCryptPasswordEncoder(); 
-  }
+  // @Bean public BCryptPasswordEncoder bCryptPasswordEncoder() {
+  //   return new BCryptPasswordEncoder(); 
+  // }
+
   public static void main(String[] args) {
-      SpringApplication.run(MyProject.class, args);
-    }
-
-
+    SpringApplication.run(MyProject.class, args);
+  }
     
 }
